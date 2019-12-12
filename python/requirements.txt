@@ -1,0 +1,6 @@
+# Always pin versions of dependenies:
+# 1. This makes a build reproducible. Otherwise, latest versions of dependencies can potentially break your application due to
+#   incompatibilities
+# 2. This works as Docker cache "busting" -- a technque that forces updating a cache for the image. Otherwise, pip will not check for new
+#   versions
+boto3==1.10.37
