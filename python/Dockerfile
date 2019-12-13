@@ -1,6 +1,6 @@
 # This is a Dockerfile for example Python web app. It strives to capture best practices for writing Dockerfiles described in official 
 # docs as well as some other non-official sources. It is heavily commented. You can grab a comments-free version of the file from 
-# Dockerfile.prod
+# Dockerfile-prod-python. It is created upon `make` execution (See Makefile)
 
 # This is a multistage build that uses python:3.7 as a named base image
 # See: https://docs.docker.com/develop/develop-images/multistage-build/
@@ -55,6 +55,10 @@ EXPOSE 8080
 
 # Add path with python packages to existing PATH environment variable.
 ENV PATH=/home/app/.local/bin:$PATH
+
+# Force the stdout and stderr streams to be unbuffered. This is useful for receiving timely log messages and avoiding situations where the application crashes without emitting a relevant message due to the message being "stuck" in a buffer.
+# Source: https://github.com/awslabs/amazon-sagemaker-examples/issues/319#issuecomment-405749895
+ENV PYTHONUNBUFFERED=1
 
 # Switch to working directory with an app. Avoid using 'cd' when possible
 WORKDIR /app
